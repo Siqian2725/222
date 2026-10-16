@@ -59,12 +59,16 @@ colSums(is.na(jan_feb_flights))
 
 _Use this space to summarize what you attempted, either from your own exploration or an AI explanation._
 
+I explored the structure of jan_feb_flights using glimpse(), identified integer, double and character columns, and checked the number of missing values in each column using is.na() and colSums().
+
 ## 1.3 Reflection
 
 Did the GenAI explanation (if used) help you? Which language model you explored? 
 What was clear or unclear? Did it make any errors or skip anything important? Did you fact-check? Did you need to provide follow-up prompts or clarifications, or was the first response sufficient?
 
 _Your answer here_
+
+I used ChatGPT to help me understand how to check the column types and missing values in the dataset. The explanation of sapply() with is.integer(), is.double(), and is.character() was helpful because it showed how each column can be checked by type. I also used is.na() and colSums() to identify missing values. I checked the suggested code by running it in RStudio and comparing the output with glimpse(). The first explanation was sufficient, although I asked a follow-up question to clarify how sapply() works.
 
 ---
 
@@ -74,17 +78,22 @@ _Your answer here_
 
 ## 2.1 Code
 
-```{r eval=FALSE} 
+```{r eval=TRUE} 
 ## REMEMBER TO SET eval=TRUE
 
 # join the datasets
 jan_feb_flights <- jan_feb_flights %>%
-  ____________(weather, by = c(______________________)) 
+  left_join(weather, by = c("origin", "year", "month", "day", "hour")) 
 ```
 
 ```{r}
 # is there a difference in wind speed when wind_gust is missing vs not missing?
 
+jan_feb_flights %>%
+  group_by(gust_missing = is.na(wind_gust)) %>%
+  summarise(
+    mean_wind_speed = mean(wind_speed, na.rm = TRUE)
+  )
 
 
 ```
@@ -93,18 +102,26 @@ Describe the difference in wind speed when wind_gust is missing vs not missing:
 
 _Your answer here_
 
-```{r eval=FALSE} 
+There is a clear difference in mean wind speed. When wind_gust is not missing, the mean wind speed is about 19.15, compared with about 9.18 when wind_gust is missing.
+
+```{r eval=TRUE} 
 ## REMEMBER TO SET eval=TRUE
 
 # create a new variable, gust_present
 jan_feb_flights <- jan_feb_flights %>%
-  mutate(gust_present = _______________)
+  mutate(gust_present = !is.na(wind_gust))
 ```
 
 
 ```{r}
 # is there a relationship between gust_present and dep_delay?
 
+jan_feb_flights %>%
+  group_by(gust_present) %>%
+  summarise(
+    mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+    sd_dep_delay = sd(dep_delay, na.rm = TRUE)
+  )
 
 ```
 
@@ -118,6 +135,8 @@ Was GenAI helpful as a navigator? Did it ask you questions to guide your thinkin
 Is there anything you could learn from this to be a better navigator, next time we will work in pairs?
 
 _Your answer here_
+
+Flights with recorded wind gusts have a slightly higher mean departure delay (about 11.87 minutes) than flights without recorded wind gusts (about 9.84 minutes). The standard deviations are very similar (about 36.5 minutes in both groups), so the difference in average delay is relatively small.
 
 ---
 
