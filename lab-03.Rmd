@@ -40,19 +40,19 @@ colSums(is.na(jan_feb_flights))
 
 ```{r}
 # which columns are integer
-
+names(jan_feb_flights)[sapply(jan_feb_flights, is.integer)]
 
 # which columns are double
-
+names(jan_feb_flights)[sapply(jan_feb_flights, is.double)]
 
 # which columns are character
-
+names(jan_feb_flights)[sapply(jan_feb_flights, is.character)]
 
 ```
 
 ```{r}
 # which columns contain NA's
-
+colSums(is.na(jan_feb_flights))
 ```
 
 **Summary:**  
