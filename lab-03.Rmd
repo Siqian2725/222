@@ -129,14 +129,13 @@ Describe the relationship between gust_present and dep_delay you see (if any).
 
 _Your answer here_
 
+Flights with recorded wind gusts have a slightly higher mean departure delay (about 11.87 minutes) than flights without recorded wind gusts (about 9.84 minutes). The standard deviations are very similar (about 36.5 minutes in both groups), so the difference in average delay is relatively small.
 ## 2.1 Reflection
 
 Was GenAI helpful as a navigator? Did it ask you questions to guide your thinking?
 Is there anything you could learn from this to be a better navigator, next time we will work in pairs?
 
 _Your answer here_
-
-Flights with recorded wind gusts have a slightly higher mean departure delay (about 11.87 minutes) than flights without recorded wind gusts (about 9.84 minutes). The standard deviations are very similar (about 36.5 minutes in both groups), so the difference in average delay is relatively small.
 
 ---
 
